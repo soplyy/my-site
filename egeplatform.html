@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0b">
+<title>EGE PLATFORM — профильная математика</title>
+
+<style>
+:root {
+  --bg: #f5f5f3;
+  --paper: #fff;
+  --ink: #101010;
+  --muted: #777;
+  --line: #e5e5e2;
+  --dark: #101010;
+  --radius: 20px;
+  --shadow: 0 12px 36px rgba(0,0,0,.06);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Arial, sans-serif;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px max(5vw, 22px);
+  background: rgba(245,245,243,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 850;
+  letter-spacing: .08em;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--dark);
+  border-radius: 11px;
+  font-size: 18px;
+}
+
+.top-link {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.wrap {
+  width: min(1120px, 90vw);
+  margin: 0 auto;
+}
+
+.hero { padding: 76px 0 46px; }
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 760px;
+  margin: 17px 0;
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: .98;
+  letter-spacing: -.065em;
+}
+
+.hero p {
+  max-width: 560px;
+  color: #606060;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.btn {
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 13px 20px;
+  background: var(--ink);
+  color: white;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin: 42px 0 18px;
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(25px, 4vw, 36px);
+  letter-spacing: -.045em;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.progress-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 22px;
+  margin: 22px 0 36px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.progress-track {
+  height: 8px;
+  overflow: hidden;
+  background: #ececea;
+  border-radius: 99px;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--ink);
+  border-radius: inherit;
+  transition: width .3s;
+}
+
+.progress-number {
+  font-size: 28px;
+  font-weight: 850;
+  letter-spacing: -.05em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding-bottom: 70px;
+}
+
+.task-card {
+  min-height: 210px;
+  padding: 23px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: .2s;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  border-color: #aaa;
+  box-shadow: var(--shadow);
+}
+
+.task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-num {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: .12em;
+  font-weight: 800;
+}
+
+.task-arrow { font-size: 22px; }
+
+.task-card h3 {
+  margin: 28px 0 8px;
+  font-size: 22px;
+  letter-spacing: -.04em;
+}
+
+.task-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.task-status {
+  margin-top: 18px;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.screen {
+05:34 PM
+
+
+display: none;
+  padding: 34px 0 80px;
+}
+
+.screen.active { display: block; }
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 26px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.lesson-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 26px;
+}
+
+.lesson-head h1 {
+  font-size: clamp(36px, 5vw, 58px);
+  margin: 8px 0;
+}
+
+.lesson-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(270px, .8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.panel {
+  padding: 25px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.panel + .panel { margin-top: 16px; }
+
+.panel h3 {
+  margin: 0 0 15px;
+  font-size: 19px;
+  letter-spacing: -.03em;
+}
+
+.task-text {
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.math {
+  margin: 18px 0;
+  padding: 17px;
+  background: #f4f4f2;
+  border-radius: 13px;
+  font-family: Georgia, serif;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.answer-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.answer-row input {
+  min-width: 0;
+  flex: 1;
+  padding: 14px 15px;
+  border: 1px solid #d9d9d5;
+  border-radius: 12px;
+  outline: none;
+}
+
+.answer-row input:focus,
+textarea:focus { border-color: #777; }
+
+.feedback {
+  min-height: 24px;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.feedback.good { color: #187343; }
+.feedback.bad { color: #a33a32; }
+
+.outline-btn {
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: white;
+  font-weight: 700;
+}
+
+.outline-btn:hover { background: #f4f4f2; }
+
+.solution {
+  display: none;
+  margin-top: 15px;
+  padding: 17px;
+  background: #f4f4f2;
+  border-radius: 13px;
+  line-height: 1.7;
+}
+
+.solution.show { display: block; }
+
+.hint {
+  display: none;
+  margin-top: 12px;
+  padding: 14px;
+  border-left: 3px solid #111;
+  background: #f6f6f4;
+  line-height: 1.6;
+}
+
+.hint.show { display: block; }
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  resize: vertical;
+  border: 1px solid #dededb;
+  border-radius: 12px;
+  outline: none;
+}
+
+.ai-box {
+  background: var(--dark);
+  color: white;
+  border-radius: var(--radius);
+  padding: 23px;
+}
+
+.ai-box h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.ai-box p {
+  color: #c7c7c7;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ai-input {
+  width: 100%;
+  min-height: 86px;
+  margin: 10px 0;
+  padding: 13px;
+  color: white;
+  background: #242424;
+  border: 1px solid #444;
+  border-radius: 12px;
+  resize: vertical;
+  outline: none;
+}
+
+.ai-box .btn {
+  color: var(--ink);
+  background: white;
+  border-color: white;
+}
+
+.ai-response {
+  display: none;
+  margin-top: 14px;
+  padding: 14px;
+  color: #eee;
+  background: #242424;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ai-response.show { display: block; }
+
+footer {
+  padding: 25px 5vw;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 30;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 12px 18px;
+  border-radius: 99px;
+  color: white;
+  background: #111;
+  transition: .25s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 800px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .lesson-layout { grid-template-columns: 1fr; }
+  .hero { padding-top: 54px; }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .task-card { min-height: 175px; }
+  .progress-card { grid-template-columns: 1fr; }
+  .answer-row { flex-direction: column; }
+  .lesson-head { display: block; }
+  .panel { padding: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">E</div>
+    <span>EGE PLATFORM</span>
+  </div>
+  <button class="top-link" id="homeLink">Главная ↗</button>
+</header>
+05:34 PM
+<main class="wrap">
+
+<section id="homeScreen" class="screen active">
+
+  <div class="hero">
+    <div class="eyebrow">
+      Профильная математика · подготовка к ЕГЭ
+    </div>
+
+    <h1>Готовься.<br>Решай.<br>Поступай.</h1>
+
+    <p>
+      Тренируйся в своём темпе, разбирай ошибки
+      и отслеживай прогресс. Не просто запоминай
+      ответы — понимай, как решать.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn" id="startButton">
+        Начать подготовку →
+      </button>
+
+      <button class="btn secondary" id="progressButton">
+        Мой прогресс
+      </button>
+    </div>
+  </div>
+
+  <div class="section-head" id="topics">
+    <div>
+      <div class="eyebrow">Тренажёр</div>
+      <h2>Выбери тему</h2>
+    </div>
+    <div class="sub">7 учебных разделов</div>
+  </div>
+
+  <div class="progress-card" id="progressCard">
+    <div>
+      <strong>Твой прогресс</strong>
+      <div class="sub" id="progressText">
+        Пока нет решённых заданий.
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="progress-number" id="progressNumber">
+      0%
+    </div>
+  </div>
+
+  <div class="grid" id="taskGrid"></div>
+
+</section>
+
+<section id="lessonScreen" class="screen">
+
+  <button class="back" id="backButton">
+    ← Все темы
+  </button>
+
+  <div class="lesson-head">
+    <div>
+      <div class="eyebrow" id="lessonEyebrow">
+        Раздел тренажёра
+      </div>
+
+      <h1 id="lessonTitle">Тема</h1>
+
+      <div class="sub" id="lessonSubtitle">
+        Тренировочное задание
+      </div>
+    </div>
+
+    <div class="sub" id="lessonCounter"></div>
+  </div>
+
+  <div class="lesson-layout">
+
+    <div>
+
+      <article class="panel">
+        <h3>Задание</h3>
+
+        <div class="task-text" id="taskText"></div>
+
+        <div class="math" id="taskFormula"></div>
+
+        <div class="sub">
+          Введи ответ в поле ниже.
+          Для десятичных дробей можно использовать точку или запятую.
+        </div>
+
+        <div class="answer-row">
+          <input
+            id="answerInput"
+            type="text"
+            inputmode="decimal"
+            placeholder="Твой ответ"
+          >
+
+          <button class="btn" id="checkButton">
+            Проверить
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:10px">
+
+          <button class="outline-btn" id="hintButton">
+            Показать подсказку
+          </button>
+
+          <button class="outline-btn" id="solutionButton">
+            Показать решение
+          </button>
+
+          <button class="outline-btn" id="nextButton">
+            Следующая тема →
+          </button>
+
+        </div>
+
+        <div class="hint" id="hintBox"></div>
+
+        <div class="solution" id="solutionBox"></div>
+      </article>
+
+      <article class="panel">
+        <h3>Мои заметки</h3>
+
+        <p class="sub">
+          Записывай формулы, вопросы и то,
+          что нужно повторить.
+          Заметки сохраняются на этом устройстве.
+        </p>
+
+        <textarea
+          id="notes"
+          placeholder="Напиши здесь свои заметки..."
+        ></textarea>
+
+        <div style="display:flex;justify-content:flex-end;margin-top:10px">
+          <button class="outline-btn" id="saveNotes">
+            Сохранить заметки
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <aside>
+
+      <div class="ai-box">
+        <h3>ИИ-помощник</h3>
+
+        <p>
+          Напиши, что именно непонятно.
+          В демо-версии доступны подсказки по текущей задаче.
+          Для настоящих ответов ИИ понадобится подключить
+          защищённый сервер и API.
+        </p>
+
+        <textarea
+          class="ai-input"
+          id="aiQuestion"
+          placeholder="Например: почему здесь нужно возвести число в квадрат?"
+        ></textarea>
+
+        <button class="btn" id="askAI">
+          Помоги разобраться
+05:34 PM
+</button>
+
+        <div class="ai-response" id="aiResponse"></div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h3>Как заниматься</h3>
+
+        <p class="sub" style="line-height:1.7;margin-bottom:0">
+          1. Прочитай условие.<br>
+          2. Попробуй решить самостоятельно.<br>
+          3. Проверь ответ.<br>
+          4. Если ошибся — открой подсказку и разбор.<br>
+          5. Запиши важное в заметки.
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  EGE PLATFORM · Учебный тренажёр по профильной математике
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+const topics = [
+
+{
+  id: 13,
+  title: "Уравнения",
+  desc: "Преобразования, корни и проверка решений",
+
+  task: "Реши уравнение и введи его корень.",
+
+  formula: "x² − 5x + 6 = 0",
+
+  answer: ["2", "3"],
+
+  hint:
+    "Найди два числа, произведение которых равно 6, а сумма равна 5. Это поможет разложить квадратный трёхчлен на множители.",
+
+  solution:
+    "Переносить ничего не нужно: x² − 5x + 6 = 0. Разложим на множители: (x − 2)(x − 3) = 0. Произведение равно нулю, если хотя бы один множитель равен нулю. Поэтому x − 2 = 0 или x − 3 = 0. Ответ: x = 2 или x = 3.",
+
+  ai:
+    "Здесь используется разложение квадратного трёхчлена на множители. Нужно найти два числа с произведением 6 и суммой 5: это 2 и 3. Поэтому x² − 5x + 6 = (x − 2)(x − 3)."
+},
+
+{
+  id: 14,
+  title: "Стереометрия",
+  desc: "Объёмы, площади и пространственные фигуры",
+
+  task:
+    "Найди объём цилиндра. Радиус основания равен 3, высота равна 5.",
+
+  formula: "V = πr²h",
+
+  answer: [
+    "45π",
+    "45pi",
+    "141.371669",
+    "141.37",
+    "141,37"
+  ],
+
+  hint:
+    "Сначала возведи радиус в квадрат. Затем умножь результат на высоту и на π.",
+
+  solution:
+    "Формула объёма цилиндра: V = πr²h. Подставляем r = 3 и h = 5: V = π · 3² · 5 = π · 9 · 5 = 45π. Приближённо V ≈ 141,37. Ответ: 45π.",
+
+  ai:
+    "У цилиндра объём равен площади основания, умноженной на высоту. Основание — круг площадью πr². Поэтому V = πr²h. В этой задаче получаем 45π."
+},
+
+{
+  id: 15,
+  title: "Неравенства",
+  desc: "Метод интервалов и преобразование выражений",
+
+  task:
+    "Реши неравенство. Введи любое число из промежутка решений.",
+
+  formula: "(x − 2)(x + 1) > 0",
+
+  answer: ["0", "3", "-2", "4", "-3"],
+
+  hint:
+    "Найди нули множителей: x = 2 и x = −1. Они делят числовую прямую на три промежутка. Проверь знак произведения в каждом.",
+
+  solution:
+    "Нули выражения: x = 2 и x = −1. Отмечаем их на числовой прямой. На промежутках (−∞; −1), (−1; 2), (2; +∞) знак произведения чередуется. Старший коэффициент положительный, значит снаружи знак «плюс». Ответ: x ∈ (−∞; −1) ∪ (2; +∞). Подойдут, например, −2 или 3.",
+
+  ai:
+    "Для произведения двух множителей сначала найди точки, в которых каждый множитель равен нулю. Затем разбей прямую на интервалы и определи знак произведения на каждом. Так получается метод интервалов."
+},
+
+{
+  id: 16,
+  title: "Финансовая задача",
+  desc: "Проценты, вклады, кредиты и платежи",
+
+  task:
+    "Вклад 10 000 рублей увеличился за год на 10%. Сколько рублей стало на счёте, если капитализация происходит один раз в год?",
+
+  formula: "S = P · (1 + r / 100)",
+
+  answer: ["11000", "11 000", "11000 руб"],
+
+  hint:
+    "Найди 10% от 10 000 рублей, а затем прибавь эту сумму к первоначальному вкладу.",
+
+  solution:
+    "10% от 10 000: 10 000 · 0,1 = 1 000 рублей. Прибавляем проценты к вкладу: 10 000 + 1 000 = 11 000 рублей. Ответ: 11 000 рублей.",
+
+  ai:
+    "Процент — это одна сотая часть числа. Чтобы найти 10% от 10 000, умножаем 10 000 на 0,10. Полученные 1 000 рублей прибавляем к вкладу."
+},
+
+{
+  id: 17,
+  title: "Планиметрия",
+  desc: "Треугольники, окружности и четырёхугольники",
+
+  task:
+    "Найди площадь прямоугольного треугольника с катетами 6 и 8.",
+
+  formula: "S = (a · b) / 2",
+
+  answer: ["24", "24 см2", "24см²"],
+
+  hint:
+    "Площадь прямоугольного треугольника равна половине произведения его катетов.",
+05:34 PM
+solution:
+    "Используем формулу S = (a · b) / 2. Подставляем катеты: S = (6 · 8) / 2 = 48 / 2 = 24. Ответ: 24.",
+
+  ai:
+    "У прямоугольного треугольника катеты одновременно являются основанием и высотой. Поэтому площадь — половина произведения катетов."
+},
+
+{
+  id: 18,
+  title: "Параметры",
+  desc: "Уравнения и системы с параметром",
+
+  task:
+    "При каком значении a уравнение x + a = 7 имеет корень x = 3?",
+
+  formula: "x + a = 7",
+
+  answer: ["4"],
+
+  hint:
+    "Подставь вместо x число 3. Получится простое уравнение относительно a.",
+
+  solution:
+    "Подставляем x = 3 в уравнение: 3 + a = 7. Вычитаем 3 из обеих частей: a = 7 − 3 = 4. Ответ: 4.",
+
+  ai:
+    "Параметр — это число, которое пока неизвестно. Если нам известен корень x = 3, просто подставляем его в исходное уравнение и находим a."
+},
+
+{
+  id: 19,
+  title: "Теория чисел",
+  desc: "Делимость, остатки и целые числа",
+
+  task:
+    "Найди наименьшее положительное целое число, которое делится и на 6, и на 8.",
+
+  formula: "НОК(6, 8) = ?",
+
+  answer: ["24"],
+
+  hint:
+    "Выпиши кратные 6 и 8, пока не встретишь первое общее число.",
+
+  solution:
+    "Кратные 6: 6, 12, 18, 24, 30, ... Кратные 8: 8, 16, 24, 32, ... Первое общее положительное число — 24. Это наименьшее общее кратное. Ответ: 24.",
+
+  ai:
+    "Нужно найти наименьшее общее кратное (НОК). Это самое маленькое положительное число, которое делится на оба числа без остатка. Для 6 и 8 это 24."
+}
+
+];
+
+const $ = (id) => document.getElementById(id);
+
+const state = { current: null };
+
+const STORAGE_KEY = "ege-platform-progress-v1";
+const NOTES_KEY = "ege-platform-notes-v1";
+
+let progress = JSON.parse(
+  localStorage.getItem(STORAGE_KEY) || "[]"
+);
+
+let notes = JSON.parse(
+  localStorage.getItem(NOTES_KEY) || "{}"
+);
+
+function renderCards() {
+
+  $("taskGrid").innerHTML = topics.map(topic => {
+
+    const done = progress.includes(topic.id);
+
+    return `
+      <button class="task-card" data-topic="${topic.id}">
+
+        <div class="task-top">
+          <span class="task-num">
+            ЗАДАНИЕ ${topic.id}
+          </span>
+          <span class="task-arrow">↗</span>
+        </div>
+
+        <div>
+          <h3>${topic.title}</h3>
+          <p>${topic.desc}</p>
+        </div>
+
+        <div class="task-status">
+          ${done ? "✓ ЗАДАНИЕ ОТМЕЧЕНО" : "ОТКРЫТЬ ТРЕНАЖЁР →"}
+        </div>
+
+      </button>
+    `;
+
+  }).join("");
+
+  document.querySelectorAll("[data-topic]").forEach(card => {
+
+    card.addEventListener("click", () => {
+      openTopic(Number(card.dataset.topic));
+    });
+
+  });
+
+  updateProgress();
+}
+
+function updateProgress() {
+
+  const count = progress.length;
+
+  const percent = Math.round(
+    count / topics.length * 100
+  );
+
+  $("progressFill").style.width = percent + "%";
+
+  $("progressNumber").textContent = percent + "%";
+
+  $("progressText").textContent = count
+    ? `Отмечено тем: ${count} из ${topics.length}. Продолжай в том же духе.`
+    : "Пока нет решённых заданий. Начни с любой темы.";
+}
+
+function showScreen(screen) {
+
+  $("homeScreen").classList.toggle(
+    "active",
+    screen === "home"
+  );
+
+  $("lessonScreen").classList.toggle(
+    "active",
+    screen === "lesson"
+  );
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function openTopic(id) {
+
+  const topic = topics.find(item => item.id === id);
+
+  if (!topic) return;
+
+  state.current = topic;
+
+  $("lessonEyebrow").textContent =
+    `ЗАДАНИЕ ${topic.id}`;
+
+  $("lessonTitle").textContent = topic.title;
+
+  $("lessonSubtitle").textContent = topic.desc;
+
+  $("lessonCounter").textContent =
+    progress.includes(id) ? "✓ Уже отмечено" : "В процессе";
+
+  $("taskText").textContent = topic.task;
+
+  $("taskFormula").textContent = topic.formula;
+
+  $("answerInput").value = "";
+
+  $("feedback").textContent = "";
+
+  $("feedback").className = "feedback";
+
+  $("hintBox").textContent = topic.hint;
+
+  $("hintBox").classList.remove("show");
+
+  $("solutionBox").textContent = topic.solution;
+
+  $("solutionBox").classList.remove("show");
+05:34 PM
+$("notes").value = notes[id] || "";
+
+  $("aiQuestion").value = "";
+
+  $("aiResponse").textContent = "";
+
+  $("aiResponse").classList.remove("show");
+
+  $("hintButton").textContent = "Показать подсказку";
+
+  $("solutionButton").textContent = "Показать решение";
+
+  showScreen("lesson");
+}
+
+function normalize(value) {
+
+  return String(value)
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(",", ".")
+    .replace(/руб\.?/g, "")
+    .replace(/см²|см2/g, "");
+}
+
+function checkAnswer() {
+
+  if (!state.current) return;
+
+  const value = normalize(
+    $("answerInput").value
+  );
+
+  if (!value) {
+
+    $("feedback").textContent =
+      "Сначала введи ответ.";
+
+    $("feedback").className = "feedback bad";
+
+    return;
+  }
+
+  const correct = state.current.answer.some(
+    item => normalize(item) === value
+  );
+
+  if (correct) {
+
+    $("feedback").textContent =
+      "Верно! Отличная работа. Задание отмечено в прогрессе.";
+
+    $("feedback").className = "feedback good";
+
+    if (!progress.includes(state.current.id)) {
+
+      progress.push(state.current.id);
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(progress)
+      );
+
+      updateProgress();
+
+      renderCards();
+    }
+
+    $("lessonCounter").textContent = "✓ Выполнено";
+
+  } else {
+
+    $("feedback").textContent =
+      "Пока неверно. Попробуй ещё раз или открой подсказку.";
+
+    $("feedback").className = "feedback bad";
+  }
+}
+
+function toast(message) {
+
+  $("toast").textContent = message;
+
+  $("toast").classList.add("show");
+
+  setTimeout(() => {
+    $("toast").classList.remove("show");
+  }, 2100);
+}
+
+$("startButton").addEventListener("click", () => {
+
+  $("topics").scrollIntoView({
+    behavior: "smooth"
+  });
+
+});
+
+$("progressButton").addEventListener("click", () => {
+
+  $("progressCard").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  toast(`Выполнено тем: ${progress.length} из ${topics.length}`);
+
+});
+
+$("homeLink").addEventListener("click", () => {
+  showScreen("home");
+});
+
+$("backButton").addEventListener("click", () => {
+
+  showScreen("home");
+
+  renderCards();
+
+});
+
+$("checkButton").addEventListener("click", checkAnswer);
+
+$("answerInput").addEventListener("keydown", e => {
+
+  if (e.key === "Enter") {
+    checkAnswer();
+  }
+
+});
+
+$("hintButton").addEventListener("click", () => {
+
+  $("hintBox").classList.toggle("show");
+
+  $("hintButton").textContent =
+    $("hintBox").classList.contains("show")
+      ? "Скрыть подсказку"
+      : "Показать подсказку";
+
+});
+
+$("solutionButton").addEventListener("click", () => {
+
+  $("solutionBox").classList.toggle("show");
+
+  $("solutionButton").textContent =
+    $("solutionBox").classList.contains("show")
+      ? "Скрыть решение"
+      : "Показать решение";
+
+});
+
+$("nextButton").addEventListener("click", () => {
+
+  if (!state.current) return;
+
+  const index = topics.findIndex(
+    t => t.id === state.current.id
+  );
+
+  openTopic(
+    topics[(index + 1) % topics.length].id
+  );
+
+});
+
+$("saveNotes").addEventListener("click", () => {
+
+  if (!state.current) return;
+
+  notes[state.current.id] = $("notes").value;
+
+  localStorage.setItem(
+    NOTES_KEY,
+    JSON.stringify(notes)
+  );
+
+  toast("Заметки сохранены");
+
+});
+
+$("askAI").addEventListener("click", () => {
+
+  if (!state.current) return;
+
+  const question = $("aiQuestion").value.trim();
+
+  if (!question) {
+
+    $("aiResponse").textContent =
+      "Напиши вопрос — например, укажи шаг решения, который вызывает трудности.";
+
+  } else {
+
+    $("aiResponse").textContent =
+      state.current.ai +
+      " Если хочешь, пришли конкретную строчку своего решения — разберём её отдельно. (Это демонстрационный ответ, не подключённая ИИ-модель.)";
+  }
+
+  $("aiResponse").classList.add("show");
+
+});
+
+renderCards();
+
+</script>
+
+</body>
+</html>
